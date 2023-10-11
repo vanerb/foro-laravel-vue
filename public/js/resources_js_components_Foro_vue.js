@@ -24,17 +24,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   computed: {
-    computed: {
-      info: function info() {
-        // Obtener la cadena JSON de sessionStorage
-        var userData = sessionStorage.getItem("user");
+    info: function info() {
+      // Obtener la cadena JSON de sessionStorage
+      var userData = sessionStorage.getItem("user");
 
-        // Parsear la cadena JSON en un objeto JavaScript
-        var userObject = JSON.parse(userData);
+      // Parsear la cadena JSON en un objeto JavaScript
+      var userObject = JSON.parse(userData);
 
-        // Acceder a las propiedades del objeto
-        return userObject;
-      }
+      // Acceder a las propiedades del objeto
+      return userObject;
     }
   },
   mounted: function mounted() {
@@ -146,7 +144,7 @@ var render = function render() {
       staticClass: "card-header"
     }, [_c("h1", [_vm._v(_vm._s(foro.title))])])]), _vm._v(" "), _c("div", {
       staticClass: "card-footer"
-    }, [_c("small", [_vm._v(_vm._s(_vm.getFecha(foro.created_at)) + " - " + _vm._s(_vm.getUserById(_vm.CleanNumber(foro.user_id))))])])], 1);
+    }, [_c("small", [_vm._v(_vm._s(_vm.getFecha(foro.created_at)) + " -\n            " + _vm._s(_vm.getUserById(_vm.CleanNumber(foro.user_id))))])])], 1);
   }), 0)])]);
 };
 var staticRenderFns = [function () {

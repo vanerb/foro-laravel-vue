@@ -20,7 +20,10 @@
             </div>
           </router-link>
           <div class="card-footer">
-            <small>{{ getFecha(foro.created_at) }} - {{ getUserById(CleanNumber(foro.user_id) ) }}</small>
+            <small
+              >{{ getFecha(foro.created_at) }} -
+              {{ getUserById(CleanNumber(foro.user_id)) }}</small
+            >
           </div>
         </div>
       </div>
@@ -34,21 +37,19 @@ export default {
   data() {
     return {
       foros: [],
-      users:[]
+      users: [],
     };
   },
   computed: {
-    computed: {
-      info() {
-        // Obtener la cadena JSON de sessionStorage
-        const userData = sessionStorage.getItem("user");
+    info() {
+      // Obtener la cadena JSON de sessionStorage
+      const userData = sessionStorage.getItem("user");
 
-        // Parsear la cadena JSON en un objeto JavaScript
-        const userObject = JSON.parse(userData);
+      // Parsear la cadena JSON en un objeto JavaScript
+      const userObject = JSON.parse(userData);
 
-        // Acceder a las propiedades del objeto
-        return userObject;
-      },
+      // Acceder a las propiedades del objeto
+      return userObject;
     },
   },
   mounted() {
@@ -56,7 +57,7 @@ export default {
     this.showUsers();
   },
   methods: {
-     CleanNumber(numeroString) {
+    CleanNumber(numeroString) {
       const numero = parseInt(numeroString, 10); // Convierte la cadena en un número entero
       return numero.toString(); // Convierte el número nuevamente en una cadena
     },

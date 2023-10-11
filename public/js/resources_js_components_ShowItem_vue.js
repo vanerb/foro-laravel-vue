@@ -34,6 +34,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.showUsers();
   },
   computed: {
+    isLoggedIn: function isLoggedIn() {
+      // Puedes utilizar alguna lógica para determinar si el usuario está autenticado
+      // Por ejemplo, comprobar si existe una variable de usuario en el almacenamiento local
+      return sessionStorage.getItem("user") !== null;
+    },
     info: function info() {
       // Obtener la cadena JSON de sessionStorage
       var userData = sessionStorage.getItem("user");
@@ -43,6 +48,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       // Acceder a las propiedades del objeto
       return userObject;
+    },
+    isAdmin: function isAdmin() {
+      if (this.isLoggedIn) {
+        if (this.info.user_id == 1) {
+          return true;
+        } else {
+          return false;
+        }
+      }
     }
   },
   methods: {
@@ -218,7 +232,7 @@ var render = function render() {
       staticClass: "col-md-12"
     }, [_c("p", [_c("i", {
       staticClass: "fa-solid fa-user fs-6"
-    }), _vm._v(" "), _c("small", [_vm._v(_vm._s(_vm.getUserById(_vm.CleanNumber(comment.user_id))) + " - " + _vm._s(_vm.getFecha(comment.created_at)))])]), _vm._v(" "), _c("p", [_vm._v(_vm._s(comment.content))]), _vm._v(" "), _c("a", {
+    }), _vm._v(" "), _c("small", [_vm._v(_vm._s(_vm.getUserById(_vm.CleanNumber(comment.user_id))) + " -\n              " + _vm._s(_vm.getFecha(comment.created_at)))])]), _vm._v(" "), _c("p", [_vm._v(_vm._s(comment.content))]), _vm._v(" "), _c("a", {
       staticClass: "link-opacity-100",
       attrs: {
         href: "#"
@@ -229,7 +243,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("Responder")]), _vm._v(" "), _c("hr")])]);
-  })], 2)]), _vm._v(" "), _c("div", {
+  })], 2)]), _vm._v(" "), _vm.isLoggedIn ? _c("div", {
     staticClass: "row mt-5"
   }, [_c("div", {
     staticClass: "col-md-6 offset-3"
@@ -270,7 +284,7 @@ var render = function render() {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("\n            Enviar\n          ")])])])])])]);
+  }, [_vm._v("\n            Enviar\n          ")])])])])]) : _vm._e()]);
 };
 var staticRenderFns = [function () {
   var _vm = this,

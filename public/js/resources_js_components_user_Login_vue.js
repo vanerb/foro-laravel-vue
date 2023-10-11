@@ -37,7 +37,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 sessionStorage.setItem("user", JSON.stringify(response.data));
                 window.location.reload();
                 _this.$router.push({
-                  name: "mostrarBlogs"
+                  name: "/"
                 });
               })["catch"](function (error) {
                 // Se ha producido un error en la solicitud

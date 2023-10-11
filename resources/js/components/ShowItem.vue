@@ -17,9 +17,15 @@
         <p><b>Respuestas: </b></p>
         <div class="row" v-for="comment in comments" :key="comment.id">
           <div class="col-md-12">
-            <p><i class="fa-solid fa-user fs-6"></i> <small>{{ getUserById(CleanNumber(comment.user_id)) }} - {{ getFecha(comment.created_at) }}</small></p>
+            <p>
+              <i class="fa-solid fa-user fs-6"></i>
+              <small
+                >{{ getUserById(CleanNumber(comment.user_id)) }} -
+                {{ getFecha(comment.created_at) }}</small
+              >
+            </p>
             <p>{{ comment.content }}</p>
-            
+
             <a class="link-opacity-100" href="#" @click="responder(comment.id)"
               >Responder</a
             >
@@ -29,7 +35,7 @@
       </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="row mt-5" v-if="isLoggedIn">
       <div class="col-md-6 offset-3">
         <form @submit.prevent="addComment">
           <div class="mb-3">
@@ -70,6 +76,12 @@ export default {
     this.showUsers();
   },
   computed: {
+    isLoggedIn() {
+      // Puedes utilizar alguna lógica para determinar si el usuario está autenticado
+      // Por ejemplo, comprobar si existe una variable de usuario en el almacenamiento local
+      return sessionStorage.getItem("user") !== null;
+    },
+
     info() {
       // Obtener la cadena JSON de sessionStorage
       const userData = sessionStorage.getItem("user");
@@ -80,9 +92,15 @@ export default {
       // Acceder a las propiedades del objeto
       return userObject;
     },
-
-
-    
+    isAdmin() {
+      if (this.isLoggedIn) {
+        if (this.info.user_id == 1) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
   },
   methods: {
     getFecha(fecha) {
@@ -161,7 +179,7 @@ export default {
       await this.axios
         .get(`/api/comment/${id}`)
         .then((response) => {
-          this.comment.content = " | re: "+response.data.content + " | "
+          this.comment.content = " | re: " + response.data.content + " | ";
           console.log(response.data);
         })
         .catch((error) => {

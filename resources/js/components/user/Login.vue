@@ -50,7 +50,7 @@ export default {
             console.log("Usuario logueado:", response.data);
             sessionStorage.setItem("user", JSON.stringify(response.data));
             window.location.reload();
-            this.$router.push({ name: "mostrarBlogs" });
+            this.$router.push({ name: "/" });
           })
           .catch((error) => {
             // Se ha producido un error en la solicitud
